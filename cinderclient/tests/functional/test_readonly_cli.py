@@ -98,3 +98,7 @@ class CinderClientReadOnlyTests(base.ClientTestBase):
         list_extensions = self.cinder('list-extensions')
         self.assertTableHeaders(list_extensions, ['Name', 'Summary', 'Alias',
                                                   'Updated'])
+
+    def test_backup_enabled(self):
+        list_fields = self.cinder('backup-service-enabled')
+        self.assertTableHeaders(list_fields,['Name', 'Desc'])

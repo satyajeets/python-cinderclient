@@ -44,6 +44,7 @@ class ServiceManager(base.ManagerWithFind):
             filters.append("binary=%s" % binary)
         if filters:
             url = "%s?%s" % (url, "&".join(filters))
+
         return self._list(url, "services")
 
     def enable(self, host, binary):

@@ -34,3 +34,9 @@ class FakeHTTPClient(fake_v2.FakeHTTPClient):
     def __init__(self, **kwargs):
         super(FakeHTTPClient, self).__init__()
         self.management_url = 'http://10.0.2.15:8776/v3/fake'
+
+    def get_os_system_capabilities(self):
+        return (200, {},
+            {'services':
+             [{'name': 'cinder-backup',
+               'desc': 'backup is enabled'}]})

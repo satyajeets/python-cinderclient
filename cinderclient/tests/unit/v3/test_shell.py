@@ -31,7 +31,7 @@ class ShellTest(utils.TestCase):
         'CINDER_USERNAME': 'username',
         'CINDER_PASSWORD': 'password',
         'CINDER_PROJECT_ID': 'project_id',
-        'OS_VOLUME_API_VERSION': '3',
+        'OS_VOLUME_API_VERSION': '3.6',
         'CINDER_URL': keystone_client.BASE_URL,
     }
 
@@ -93,3 +93,7 @@ class ShellTest(utils.TestCase):
         self.assert_called_anytime('GET', '/volumes/1234')
         self.assert_called_anytime('POST', '/volumes/1234/action',
                                    body=expected)
+
+    def test_backup_service_enabling(self):
+        self.run_command('backup-service-enabled')
+        self.assert_called('GET', '/resource-capabilities')

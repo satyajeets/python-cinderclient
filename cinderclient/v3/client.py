@@ -35,7 +35,7 @@ from cinderclient.v3 import volume_encryption_types
 from cinderclient.v3 import volume_backups
 from cinderclient.v3 import volume_backups_restore
 from cinderclient.v3 import volume_transfers
-
+from cinderclient.v3 import backup_service_capabilities as bsc
 
 class Client(object):
     """Top-level object to access the OpenStack Volume API.
@@ -88,6 +88,7 @@ class Client(object):
         self.pools = pools.PoolManager(self)
         self.capabilities = capabilities.CapabilitiesManager(self)
         self.api_version = api_version or api_versions.APIVersion(self.version)
+        self.bsc = bsc.ServiceCapabilitiesManager(self)
 
         # Add in any extensions...
         if extensions:

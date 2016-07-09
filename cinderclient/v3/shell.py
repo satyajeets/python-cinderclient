@@ -30,6 +30,7 @@ from cinderclient import exceptions
 from cinderclient import utils
 from cinderclient.v3 import availability_zones
 from oslo_utils import strutils
+from cinderclient import api_versions
 
 
 def _poll_for_status(poll_fn, obj_id, action, final_ok_states,
@@ -2682,7 +2683,6 @@ def do_failover_host(cs, args):
     """Failover a replicating cinder-volume host."""
     cs.services.failover_host(args.host, args.backend_id)
 
-
 @utils.service_type('volumev3')
 @api_versions.wraps("3.0")
 def do_api_version(cs, args):
@@ -2690,3 +2690,11 @@ def do_api_version(cs, args):
     columns = ['ID', 'Status', 'Version', 'Min_version']
     response = cs.services.server_api_version()
     utils.print_list(response, columns)
+
+@utils.service_type('volumev3')
+def do_backup_service_enabled(cs, args):
+    """backup service status"""
+    resp = cs.bsc.list()
+    columns = ['Name', 'Desc']
+    utils.print_list(resp, columns)
+
